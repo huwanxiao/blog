@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提交表单</title>
+    <style>
+        table {
+        width: 100%;
+        height: 400px;
+        text-align: center;
+        border-collapse: collapse;
+        text-align: left;
+       }
+       tr,td {
+        border: 1px solid steelblue;
+       }
+    </style>
+</head>
+<body>
+    <form action="/change?id={{data[0].id}}" method="POST" name="submit">
+        <table border="1">
+            <tr>
+                <td>姓名</td>
+                <td><input name="name" type="text" ="请输入姓名" value="{{data[0].name}}"></input></td>
+            </tr>
+            <tr>
+                <td>能力</td>
+                <td><input name="fruit" type="text" placeholder="请输入能力" value="{{data[0].fruit}}"></input></td>
+            </tr>
+            <tr>
+                <td>上传图片</td>
+                <td>
+                    <input type="file"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                       <input type="submit" value="确定修改"/>
+                    </div>
+                </td>
+            </tr>
+        </table> 
+    </form>
+</body>
+</html>

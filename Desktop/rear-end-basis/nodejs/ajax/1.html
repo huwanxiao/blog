@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ajax</title>
+  </head>
+  <body>
+    <button id="btn">点击</button>
+    <script>
+      //发起一个Ajax请求。xhr请求是访问服务器的操作。可以把此文件夹放在Apache根目录访问他
+      document.getElementById("btn").onclick = () => {
+        let xhr = new XMLHttpRequest();    //新建一个请求对象
+        xhr.onreadystatechange = () => {  //请求状态码改变时调用
+          alert(xhr.readyState)          //这里会打印出5个状态码
+          if (xhr.readyState == 4 && xhr.status == 200) {    //请求已完成，响应已就绪且返回成功
+            alert("请求成功"+xhr.responseText);              //匿名函数这里不能用this.xxx。记录个坑
+          }
+        };
+        xhr.open("get", "./2.php");      //请求路径
+        xhr.send();                     //发送请求,里面可以写传送的数据
+        alert("我排在最后但是先输出");   //用于说明异步操作
+      };
+    </script>
+  </body>
+</html>

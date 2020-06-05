@@ -1,0 +1,8 @@
+//mysql语句的复习
+select * from xx where id=1
+
+update xx set name='hwx',age=20 where id=2
+
+insert into xx(name,age) values('lisi',22)
+
+delete from xx where id=4

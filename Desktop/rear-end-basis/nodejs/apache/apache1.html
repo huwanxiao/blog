@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务器端渲染</title>
+</head>
+<body>
+    <p>我是apache1.html</p>
+    <div style="background:greenyellow" id="filename">
+        {{each data}}
+           <span style="background: hotpink;">文件名:{{$value.name}}</span>
+           <span style="background: rgb(195, 0, 255);">文件大小:{{$value.size}}</span>
+           <span style="background: rgb(212, 11, 11);">修改时间:{{$value.mtime}}</span>
+           <span style="background: rgba(139, 180, 42, 0.575);">文件类型:{{$value.type}}</span>
+           <br>
+        {{/each}}
+    </div>
+</body>
+</html>

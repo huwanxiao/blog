@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示服务端的静态文件</title>
+</head>
+<body>
+    <p>我是apache.html</p>
+    <div style="background:greenyellow" id="filename"></div>
+    <script>
+      //这是客户端渲染
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = () => {
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let data = JSON.parse(xhr.responseText)
+            let html = ``
+            data.forEach(item => {
+              html += `<span style='background-color:red'>filename:${item.name}</span>`
+              html += `<span style='background-color:yellow'>filesize:${item.size}</span>`
+              html += `<span style='background-color:blue'>修改时间:${item.mtime}</span>`
+              html += `<span style='background-color:blue'>类型:${item.type}</span>`
+              html += `<br>`  
+            });
+            document.getElementById('filename').innerHTML += html
+        }
+      }
+      xhr.open('get','./read_file')
+      xhr.send()
+    </script>
+</body>
+</html>
