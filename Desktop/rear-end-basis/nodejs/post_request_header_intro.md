@@ -1,4 +1,4 @@
-#讲一下post请求怎样才能传送数据到服务器。
+# 讲一下post请求怎样才能传送数据到服务器。
 ## 1.回顾一下ajax请求是怎么发送post请求的
 document.getElementById("btn").onclick = () => {
     let xhr = new XMLHttpRequest();    //新建一个请求对象
