@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+      <!-- 此处介绍bean标签的属性的使用-->
+      <!--名称：id与name-->
+      <!--作用域：singleton与prototype：单例与多例-->
+      <!--bean的两个生命周期：init-methods；destoyed-methods。创建和销毁bean的时候有事会做一些处理-->
+      <bean id="userService" class="com.imooc.ioc.demo1.UserServiceImpl" init-method="setup" destroy-method="teardown">   <!--默认是单例的-->
+          <property name="name" value="张三"/>
+      </bean>
+      <bean name="/userService" class="com.imooc.ioc.demo1.UserServiceImpl" scope="prototype">
+          <property name="name" value="李四"/>
+      </bean>
+      <bean class="com.imooc.ioc.demo3.MyBeanPostProcessor"></bean>
+</beans>

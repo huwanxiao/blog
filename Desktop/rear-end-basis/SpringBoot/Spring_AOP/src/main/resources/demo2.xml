@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+      <context:annotation-config></context:annotation-config>
+<!--      配置目标类-->
+      <bean id="userDao" class="demo2.UserDaoImpl"></bean>
+<!--      前置通知类型-->
+      <bean id="myBeforeAdvance" class="demo2.MyBeforeAdvance"></bean>
+<!--      Spring的aop产生代理-->
+      <bean id="userDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+<!--            配置目标类-->
+            <property name="target" ref="userDao"></property>
+<!--            实现的接口-->
+            <property name="proxyInterfaces" value="demo2.UserDao"/>
+<!--            采用拦截的名称-->
+            <property name="interceptorNames" value="myBeforeAdvance"/>
+<!--           采用cglib的方式产生代理-->
+            <property name="optimize" value="true"></property>
+      </bean>
+</beans>
