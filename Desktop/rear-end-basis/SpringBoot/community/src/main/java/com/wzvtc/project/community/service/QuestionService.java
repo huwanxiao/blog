@@ -42,7 +42,7 @@ public class QuestionService {
         List<QuestionDTO> questionDTOS = new ArrayList<>();
         PaginationDTO paginationDTO = new PaginationDTO();
         for (Question question : questions) {
-            User user = userMapper.findUserByToken(question.getCreator());
+            User user = userMapper.findUserById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question,questionDTO);
             questionDTO.setUser(user);

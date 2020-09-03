@@ -43,7 +43,6 @@ public class IndexController {
                 User user = userMapper.findUserByToken(token);
                 if(user != null) {
                     request.getSession().setAttribute("user",user);
-                    System.out.println(request.getSession().getAttribute("user"));
                 }
                 break;
             }

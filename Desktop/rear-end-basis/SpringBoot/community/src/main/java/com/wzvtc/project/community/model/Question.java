@@ -12,7 +12,7 @@ public class Question {
     private String title;
     private String description;
     private String tag;
-    private String creator;
+    private Integer creator;
     private Integer viewCount;
     private Integer likeCount;
     private Integer commentCount;
