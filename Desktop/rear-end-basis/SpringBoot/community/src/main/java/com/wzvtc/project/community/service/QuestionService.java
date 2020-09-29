@@ -23,6 +23,7 @@ public class QuestionService {
     private QuestionMapper questionMapper;
 
     public PaginationDTO listQuestion(Integer currentPage, Integer size) {
+        //获取问题总量
         Integer totalPage = 0;
         Integer totalCount = questionMapper.count();
 
@@ -51,5 +52,47 @@ public class QuestionService {
         paginationDTO.setQuestions(questionDTOS);
         paginationDTO.setPagination(totalCount, currentPage, size, totalPage);
         return paginationDTO;
+    }
+
+    public PaginationDTO listQuestionById(Integer userId, Integer currentPage, Integer size) {
+        //获取问题总量
+        Integer totalPage = 0;
+        Integer totalCount = questionMapper.count();
+
+        //计算totalpage
+        if(totalCount % size == 0) {
+            totalPage = totalCount / size;
+        }else {
+            totalPage = totalCount / size + 1;
+        }
+
+        //参数容错
+        if(currentPage < 1) currentPage = 1;
+        if(currentPage > totalPage) currentPage = totalPage;
+
+        Integer offset = size * (currentPage - 1 );
+        List<Question> questions = questionMapper.listQuestionById(userId, offset, size);
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+        PaginationDTO paginationDTO = new PaginationDTO();
+        for (Question question : questions) {
+            User user = userMapper.findUserById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(user);
+            questionDTOS.add(questionDTO);
+        }
+        paginationDTO.setQuestions(questionDTOS);
+        paginationDTO.setPagination(totalCount, currentPage, size, totalPage);
+        return paginationDTO;
+    }
+
+    public QuestionDTO getQuestionById(Integer id) {
+        Question question = questionMapper.getQuestionById(id);
+        QuestionDTO questionDTO = new QuestionDTO();
+
+        User user = userMapper.findUserById(question.getCreator());
+        BeanUtils.copyProperties(question, questionDTO);
+        questionDTO.setUser(user);
+        return questionDTO;
     }
 }

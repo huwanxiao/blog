@@ -11,12 +11,22 @@ import java.util.List;
 
 @Mapper
 public interface QuestionMapper {
+
     @Insert("insert into question(title,description,gmt_create,gmt_modify,creator,tag) values(#{title},#{description},#{gmtCreate},#{gmtModify},#{creator},#{tag})")
     void createQuestion(Question question);
+
+    @Select("select count(1) from question")
+    Integer count();
 
     @Select("select * from question limit #{offset},#{size}")
     List<Question> listQuestion(@Param(value = "offset") Integer offset, @Param(value = "size") Integer size);
 
-    @Select("select count(1) from question")
-    Integer count();
+    @Select("select * from question where creator=#{userId} limit #{offset},#{size} ")
+    List<Question> listQuestionById(@Param("userId")Integer userId, @Param("offset") Integer offset, @Param("size") Integer size);
+
+//    @Select("select count(1) from question where creator = #{id}")
+//    Integer countQuestionsByUserId(@Param("id") Integer id);
+
+    @Select("select * from question where id = #{id}")
+    Question getQuestionById(@Param("id") Integer id);
 }

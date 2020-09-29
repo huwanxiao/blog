@@ -13,6 +13,7 @@ public class QuestionDTO {
     private String title;
     private String description;
     private String tag;
+    private Integer creator;
     private Integer viewCount;
     private Integer likeCount;
     private Integer commentCount;

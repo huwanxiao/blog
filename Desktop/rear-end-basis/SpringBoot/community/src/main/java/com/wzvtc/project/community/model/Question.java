@@ -18,5 +18,4 @@ public class Question {
     private Integer commentCount;
     private Long gmtCreate;
     private Long gmtModify;
-    private String avatarUrl;
 }

@@ -25,7 +25,9 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}">null</h4>
+                    <h4 class="media-heading">
+                        <a th:href="@{'/question/' + ${question.id}}" th:text="${question.title}"></a>
+                    </h4>
                     <span th:text="${question.description}"></span>
                     <br>
                     <div class="text-desc">
@@ -71,17 +73,6 @@
 
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h3>热门话题</h3>
-            <ul>
-                <li>
-                    <b>问题标题:</b>请用精简的语言描述你发布的问题
-                </li>
-                <li>
-                    <b>问题补充:</b>详细补充您的问题内容，并确保问题描述清晰直观，并提供一些相关资料
-                </li>
-                <li>
-                    <b>选择标签:</b>选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字
-                </li>
-            </ul>
         </div>
     </div>
 </div>

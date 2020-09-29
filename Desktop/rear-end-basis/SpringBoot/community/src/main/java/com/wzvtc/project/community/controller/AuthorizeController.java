@@ -5,6 +5,7 @@ import com.wzvtc.project.community.model.User;
 import com.wzvtc.project.community.provider.GithubProvider;
 import com.wzvtc.project.community.dto.AccessTokenDTO;
 import com.wzvtc.project.community.dto.GithubUser;
+import com.wzvtc.project.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,9 @@ public class AuthorizeController {
     
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserService userService;
     
     @GetMapping("/callback")
     public String callback(@RequestParam("code") String code,
@@ -60,11 +64,23 @@ public class AuthorizeController {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModify(user.getGmtCreate());
             //把用户信息写入数据库，返回cookie凭证
-            userMapper.insert(user);
+            userService.createOrUpdate(user);
             response.addCookie(new Cookie("token",token));
             return "redirect:/";
         }else {
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }
