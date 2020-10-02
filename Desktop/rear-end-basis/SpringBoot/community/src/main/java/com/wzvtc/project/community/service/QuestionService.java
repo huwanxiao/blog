@@ -95,4 +95,23 @@ public class QuestionService {
         questionDTO.setUser(user);
         return questionDTO;
     }
+
+    public void createOrUpdate(Question question) {
+        if(question.getId() == null) {
+            //创建
+            questionMapper.createQuestion(question);
+        } else {
+            //更新
+            questionMapper.updateQuestion(question);
+        }
+    }
+
+    public void incViewOrLikeOrComment(String type,Integer id) {
+        Question question = questionMapper.getQuestionById(id);
+        if(type == "viewCount"){
+            question.setViewCount(question.getViewCount() + 1);
+            questionMapper.updateView(question);
+        }
+
+    }
 }
