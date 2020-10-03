@@ -111,7 +111,9 @@ public class QuestionService {
         if(type == "viewCount"){
             question.setViewCount(question.getViewCount() + 1);
             questionMapper.updateView(question);
+        } else if(type == "commentCount"){
+            question.setCommentCount(question.getCommentCount() + 1);
+            questionMapper.updateComment(question);
         }
-
     }
 }
