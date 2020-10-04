@@ -17,6 +17,10 @@ body {
     height: 40px;
 }
 
+.media-body {
+    padding-top: 10px;
+}
+
 .text-desc {
     font-size: 12px;
     font-weight: normal;
@@ -26,4 +30,28 @@ body {
 
 .profile .section {
     margin-top: 15px;
+}
+
+.comment {
+    margin: 10px 0;
+}
+
+.comment-btn {
+    float: right;
+    margin-bottom: 10px;
+}
+
+.menu {
+    color: #999;
+    margin-top: 5px;
+}
+
+.menu .icon{
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .icon:hover{
+color: #499ef3;
 }
