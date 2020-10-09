@@ -23,6 +23,9 @@ public class QuestionService {
     private QuestionMapper questionMapper;
 
     public PaginationDTO listQuestion(Integer currentPage, Integer size) {
+
+        PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO();
+
         //获取问题总量
         Integer totalPage = 0;
         Integer totalCount = questionMapper.count();
@@ -41,7 +44,7 @@ public class QuestionService {
         Integer offset = size * (currentPage - 1 );
         List<Question> questions = questionMapper.listQuestion(offset, size);
         List<QuestionDTO> questionDTOS = new ArrayList<>();
-        PaginationDTO paginationDTO = new PaginationDTO();
+
         for (Question question : questions) {
             User user = userMapper.findUserById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -49,12 +52,15 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOS.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOS);
-        paginationDTO.setPagination(totalCount, currentPage, size, totalPage);
+        paginationDTO.setData(questionDTOS);
+        paginationDTO.setPagination(currentPage,totalPage);
         return paginationDTO;
     }
 
     public PaginationDTO listQuestionById(Integer userId, Integer currentPage, Integer size) {
+
+        PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO();
+
         //获取问题总量
         Integer totalPage = 0;
         Integer totalCount = questionMapper.count();
@@ -73,7 +79,7 @@ public class QuestionService {
         Integer offset = size * (currentPage - 1 );
         List<Question> questions = questionMapper.listQuestionById(userId, offset, size);
         List<QuestionDTO> questionDTOS = new ArrayList<>();
-        PaginationDTO paginationDTO = new PaginationDTO();
+
         for (Question question : questions) {
             User user = userMapper.findUserById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -81,8 +87,8 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOS.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOS);
-        paginationDTO.setPagination(totalCount, currentPage, size, totalPage);
+        paginationDTO.setData(questionDTOS);
+        paginationDTO.setPagination( currentPage, totalPage);
         return paginationDTO;
     }
 

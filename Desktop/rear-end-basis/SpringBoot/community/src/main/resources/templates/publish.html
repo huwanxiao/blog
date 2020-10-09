@@ -5,9 +5,13 @@
     <title>发布文章</title>
     <script src="/js/jquery-3.5.1.js"></script>
     <script src="/js/bootstrap.js"></script>
+    <script src="/js/community.js"></script>
+    <script src="/js/editormd.min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/community.css">
+    <link rel="stylesheet" href="/css/editormd.min.css">
+
 </head>
 <body>
 <div th:insert="~{public :: nav}"></div>
@@ -31,8 +35,28 @@
 
                 <div class="form-group">
                     <label for="tag">添加标签</label>
-                    <input th:value="${tag}" type="text" name="tag" class="form-control" id="tag" placeholder="输入标签,以逗号分割" />
+                    <input th:value="${tag}" type="text" name="tag" class="form-control" id="tag" placeholder="输入标签,以逗号分割" autocomplete="off" onclick="showSelectTag('show')" onblur="showSelectTag('hide')"/>
+                    <div id="select-tag" style="display: none;margin-top: 10px">
+                        <div>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">开发语言</a></li>
+                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">平台架构</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <span class="label label-info"><span class="glyphicon glyphicon-tags" onclick="selectTag('Java')"> Java</span></span>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="profile">
+                                    <span class="label label-info"><span class="glyphicon glyphicon-tags" onclick="selectTag('Spring')"> Spring</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
 
                 <span th:text="${error}" style="color: red"></span>
                 <button type="submit" class="btn btn-success btn-publish">发布</button>
