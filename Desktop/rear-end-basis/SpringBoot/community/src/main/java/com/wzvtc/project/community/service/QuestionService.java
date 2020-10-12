@@ -2,16 +2,20 @@ package com.wzvtc.project.community.service;
 
 import com.wzvtc.project.community.dto.PaginationDTO;
 import com.wzvtc.project.community.dto.QuestionDTO;
+import com.wzvtc.project.community.dto.QuestionQueryDTO;
 import com.wzvtc.project.community.mapper.QuestionMapper;
 import com.wzvtc.project.community.mapper.UserMapper;
 import com.wzvtc.project.community.model.Question;
 import com.wzvtc.project.community.model.User;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -22,13 +26,41 @@ public class QuestionService {
     @Autowired
     private QuestionMapper questionMapper;
 
-    public PaginationDTO listQuestion(Integer currentPage, Integer size) {
+    public PaginationDTO listQuestion(String search, Integer currentPage, Integer size) {
+        List<Question> questions;
+        if(StringUtils.isNotBlank(search)) {
+            String[] tags = StringUtils.split(search, "+");
+            search = Arrays.stream(tags).collect(Collectors.joining("|"));
+        }
+        PaginationDTO paginationDTO = new PaginationDTO();
 
-        PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO();
+        //定义分页变量
+        Integer totalPage;
+        Integer totalCount;
 
-        //获取问题总量
-        Integer totalPage = 0;
-        Integer totalCount = questionMapper.count();
+        //参数容错，currentPage
+        if(currentPage < 1) currentPage = 1;
+
+
+        //获取offset
+        Integer offset = size * (currentPage - 1 );
+        //获取offset之后存入对象
+
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+
+        //获取问题列表questions和数量totalPage
+        if(StringUtils.isNotBlank(search)) {
+            //定义questionQueryDTO变量
+            QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+            questionQueryDTO.setSearch(search);
+            questionQueryDTO.setSize(size);
+            questionQueryDTO.setPage(offset);
+            totalCount = questionMapper.countBySearch(questionQueryDTO);
+            questions = questionMapper.selectBySearch(questionQueryDTO);
+        }else {
+            totalCount = questionMapper.count();
+            questions = questionMapper.listQuestion(offset, size);
+        }
 
         //计算totalpage
         if(totalCount % size == 0) {
@@ -37,13 +69,7 @@ public class QuestionService {
             totalPage = totalCount / size + 1;
         }
 
-        //参数容错
-        if(currentPage < 1) currentPage = 1;
         if(currentPage > totalPage) currentPage = totalPage;
-
-        Integer offset = size * (currentPage - 1 );
-        List<Question> questions = questionMapper.listQuestion(offset, size);
-        List<QuestionDTO> questionDTOS = new ArrayList<>();
 
         for (Question question : questions) {
             User user = userMapper.findUserById(question.getCreator());
@@ -121,5 +147,24 @@ public class QuestionService {
             question.setCommentCount(question.getCommentCount() + 1);
             questionMapper.updateComment(question);
         }
+    }
+
+    public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
+        if(StringUtils.isBlank(queryDTO.getTag())) {
+            return new ArrayList<>();
+        }
+        String[] tags = StringUtils.split(queryDTO.getTag(), ",");
+        String regexpTag = Arrays.stream(tags).collect(Collectors.joining("|"));
+        Question question = new Question();
+        question.setId(queryDTO.getId());
+        question.setTag(regexpTag);
+
+        List<Question> questions = questionMapper.selectRelated(question);
+        List<QuestionDTO> questionDTOS = questions.stream().map(q -> {
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(q, questionDTO);
+            return questionDTO;
+        }).collect(Collectors.toList());
+        return questionDTOS;
     }
 }

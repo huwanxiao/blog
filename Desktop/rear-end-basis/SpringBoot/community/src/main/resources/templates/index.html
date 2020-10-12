@@ -5,19 +5,21 @@
     <title>码文社区</title>
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="/js/community.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/community.css">
+
 </head>
 <script type="application/javascript">
     window.onload = function () {
-        debugger;
         var closable = window.localStorage.getItem("closable");
         if(closable == "true") {
             window.close();
             window.localStorage.removeItem("closable");
         }
     }
+
 </script>
 <body>
 <div th:insert="~{public :: nav}"></div>
@@ -57,23 +59,35 @@
                         </a>
                     </li>
                     <li th:if="${pagination.showPrevious}">
-                        <a th:href="@{/(page=${pagination.getCurrentPage() - 1})}">
+                        <a th:href="@{/(page=${pagination.getCurrentPage() - 1},search=${search})}" th:if="${search!=null}">
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                        <a th:href="@{/(page=${pagination.getCurrentPage() - 1})}" th:if="${search == null}">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
                     <li th:each="page : ${pagination.pages}" th:class="${pagination.currentPage == page}? 'active' : ''">
-                        <a th:href="@{/(page=${page})}" th:text="${page}">
+                        <a th:href="@{/(page=${page},search=${search})}" th:text="${page}" th:if="${search!=null}">
+                            <span aria-hidden="true">&gt;&gt;</span>
+                        </a>
+                        <a th:href="@{/(page=${page})}" th:text="${page}" th:if="${search == null}">
                             <span aria-hidden="true">&gt;&gt;</span>
                         </a>
                     </li>
 
                     <li th:if="${pagination.showNext}" >
-                        <a th:href="@{/(page=${pagination.getCurrentPage() + 1})}">
+                        <a th:href="@{/(page=${pagination.getCurrentPage() + 1},search=${search})}" th:if="${search!=null}">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                        <a th:href="@{/(page=${pagination.getCurrentPage() + 1})}" th:if="${search == null}">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
                     <li th:if="${pagination.showEndPage}">
-                        <a  th:href="@{/(page=${pagination.getTotalPage()})}">
+                        <a  th:href="@{/(page=${pagination.getTotalPage()},search=${search})}" th:if="${search!=null}">
+                            <span aria-hidden="true" th:if="${pagination.showEndPage}" th:href="@{/(page=${pagination.getTotalPage()})}">&gt;&gt;</span>
+                        </a>
+                        <a  th:href="@{/(page=${pagination.getTotalPage()})}" th:if="${search == null}">
                             <span aria-hidden="true" th:if="${pagination.showEndPage}" th:href="@{/(page=${pagination.getTotalPage()})}">&gt;&gt;</span>
                         </a>
                     </li>

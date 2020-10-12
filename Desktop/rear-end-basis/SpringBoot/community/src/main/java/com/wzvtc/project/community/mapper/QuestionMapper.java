@@ -1,5 +1,6 @@
 package com.wzvtc.project.community.mapper;
 
+import com.wzvtc.project.community.dto.QuestionQueryDTO;
 import com.wzvtc.project.community.model.Question;
 import org.apache.ibatis.annotations.*;
 import org.omg.PortableInterceptor.INACTIVE;
@@ -16,7 +17,7 @@ public interface QuestionMapper {
     @Select("select count(1) from question")
     Integer count();
 
-    @Select("select * from question limit #{offset},#{size}")
+    @Select("select * from question order by gmt_create desc limit #{offset},#{size}")
     List<Question> listQuestion(@Param(value = "offset") Integer offset, @Param(value = "size") Integer size);
 
     @Select("select * from question where creator=#{userId} limit #{offset},#{size} ")
@@ -33,4 +34,13 @@ public interface QuestionMapper {
 
     @Update("update question set comment_count = #{commentCount} where id = #{id}")
     void updateComment(Question question);
+
+    @Select("select * from question where id!=#{id} and tag regexp #{tag}")
+    List<Question> selectRelated(Question question);
+
+    @Select("select count(*) from question where title regexp #{search} or tag regexp #{search}")
+    Integer countBySearch(QuestionQueryDTO questionQueryDTO);
+
+    @Select("select * from question where tag regexp #{search} or title regexp #{search} order by gmt_create limit #{page},#{size}")
+    List<Question> selectBySearch(QuestionQueryDTO questionQueryDTO);
 }
