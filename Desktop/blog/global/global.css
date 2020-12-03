@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: '微软雅黑', sans-serif;
+  box-sizing: border-box;
+}
+
+/* 字体 */
+@font-face {
+  font-family: myFirstFont;
+  src: url('../src/assets/font/handWrite.ttf');
+}
+/* 字体 */
+
+/* 输入框样式 */
+.el-input__inner[DangerColor='danger'] {
+  background-color: #f56c6c;
+}
+
+.el-input__inner[WarningColor='warning'] {
+  background-color: #e6a23c;
+}
+
+.el-input__inner[SuccessColor='success'] {
+  background-color: #67c23a;
+}
+
+.el-input__inner[InfoColor='info'] {
+  background-color: #5891e3;
+  border-radius: 20px;
+}
+
+.el-input__inner[NormalColor='norm'] {
+  border-radius: 20px;
+}
+/* 输入框样式 */
+
+/* 拟态 */
+
+
+/* 拟态 */
