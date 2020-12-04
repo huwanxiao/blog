@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .page-index {
   width: 100%;
   height: 100%;

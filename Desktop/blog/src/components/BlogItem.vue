@@ -19,7 +19,7 @@
 export default {}
 </script>
 
-<style>
+<style lang="scss" scoped>
 .blog-item {
   width: 100%;
   padding: 10px 0px;

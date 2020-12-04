@@ -19,15 +19,15 @@ export default {
   props: ['widthLength', 'heightLength', 'imgUrl'],
   data() {
     return {
-      muti:0.9
+      muti:0.6
     }
   },
   methods:{
     press() {
-      this.muti = 0.88
+      this.muti = 0.55
     },
     unpress() {
-      this.muti = 0.9
+      this.muti = 0.6
     }
   }
 }

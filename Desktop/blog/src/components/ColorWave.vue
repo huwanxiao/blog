@@ -15,7 +15,7 @@
 export default {}
 </script>
 
-<style>
+<style lang="scss" scoped>
 .wave {
   position: relative;
   width: 100%;

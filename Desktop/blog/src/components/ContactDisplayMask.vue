@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .contact-mask {
   -webkit-perspective: 100px;
 }

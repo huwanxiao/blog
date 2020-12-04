@@ -42,7 +42,7 @@ export default {
 }
 </script>
   
-<style>
+<style lang="scss" scoped>
 .search-bar {
   position: fixed;
   top: 0;

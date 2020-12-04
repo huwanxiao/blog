@@ -1,17 +1,19 @@
 <template>
   <div class="test">
-     <blog-item/>
+    <comment-list/>
   </div>
 </template>
 
 <script>
-import BlogItem from '../components/BlogItem.vue'
+import CommentList from '../components/CommentList'
 export default {
-  components: { BlogItem },
+  components:{
+    CommentList
+  },
   mounted() {},
   data() {
     return {
-      
+ 
     }
   },
   methods: {},
@@ -22,5 +24,10 @@ export default {
 <style lang="scss" scoped>
 .test{
   position: relative;
+}
+.star{
+  width: 100vw;
+  height: 100vh;
+  background-attachment: fixed;
 }
 </style>>

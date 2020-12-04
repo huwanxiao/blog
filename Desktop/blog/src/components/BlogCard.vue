@@ -5,10 +5,9 @@
         <real-like-btn
           :widthLength="50"
           :heightLength="50"
-           v-for="(item,index) in optImg"
+          v-for="(item, index) in optImg"
           :imgUrl="item"
           :key="index"
-          @click="print(item)"
           class="real-btn"
         >
         </real-like-btn>
@@ -18,24 +17,40 @@
         </div>
       </div>
       <div class="blog-card">
-        <blog-item v-for="(item,index) in 3" :key="index"/>
+        <blog-item v-for="(item, index) in 3" :key="index" />
       </div>
       <div><el-pagination class="pagination"></el-pagination></div>
     </div>
 
     <div class="tool-content">
-      <div class="tool-card clock"></div>
-      <el-card class="tool-card weather" :body-style="{ padding: '0px' }" >
-      <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-      <div style="padding: 14px;">
-        <span>好吃的汉堡</span>
-        <div class="bottom clearfix">
-          <time class="time"></time>
-          <el-button type="text" class="button">操作按钮</el-button>
-        </div>
+      <div class="tool-card clock">
+        <clock
+          border="none"
+          bg="radial-gradient(circle, #ecffe5, #fffbe1, #38ff91)"
+          size="240px"
+        ></clock>
       </div>
-    </el-card>
+      <div class="tool-card weather">
+        <div id="weather-v2-plugin-standard"></div>
+      </div>
     </div>
+
+    <el-backtop :bottom="100">
+    <div
+      style="{
+        height: 100%;
+        width: 100%;
+        background-color: #f2f5f6;
+        box-shadow: 0 0 6px rgba(0,0,0, .12);
+        text-align: center;
+        line-height: 40px;
+        color: #1989fa;
+        border-radius:50%
+      }"
+    >
+      UP
+    </div>
+    </el-backtop>
   </div>
 </template>
 
@@ -44,33 +59,54 @@ import RealLikeBtn from './RealLikeBtn.vue'
 import addImg from '../assets/img/add.png'
 import deleteImg from '../assets/img/delete.png'
 import BlogItem from './BlogItem.vue'
+import Clock from 'vue-clock2'
+
 export default {
-  components: { RealLikeBtn, BlogItem },
-  data(){
+  components: { RealLikeBtn, BlogItem, Clock },
+  data() {
     return {
-      optImg:[addImg,deleteImg]
+      optImg: [addImg, deleteImg],
     }
   },
-  methods:{
+  methods: {
     print(item) {
-      console.log(item);
+      console.log(item)
+    },
+  },
+  mounted() {
+    window.WIDGET = {
+      CONFIG: {
+        layout: 2,
+        width: '270',
+        height: '250',
+        background: 1,
+        dataColor: 'FFFFFF',
+        aqiColor: 'FFFFFF',
+        borderRadius: '10',
+        key: 'DjcGLNk1DS',
+      },
     }
-  }
+    var script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src =
+      'https://apip.weatherdt.com/standard/static/js/weather-standard-common.js?v=2.0'
+    document.getElementsByTagName('head')[0].appendChild(script)
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-.real-btn{
+.real-btn {
   margin: 0px 5px;
 }
 .icon {
   font-size: 24px;
-  color:  #f39c12;
+  color: #f39c12;
 }
-.mode{
+.mode {
   position: absolute;
   right: 30px;
-  background: red;
+  // background: red;
   width: 100px;
   height: 50px;
   display: flex;
@@ -99,9 +135,9 @@ export default {
   border-radius: 4px;
   width: 60%;
   height: 100%;
-  background: red;
+  // background: red;
   flex: 3;
-  padding: 20px;
+  padding: 10px;
   flex-wrap: wrap;
 }
 
@@ -113,7 +149,7 @@ export default {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  background: gold;
+  // background: gold;
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -126,16 +162,18 @@ export default {
   height: 100%;
   width: 30%;
   padding: 10px;
-  background: red;
+  // background: red;
   flex: 2;
 }
 
 .tool-card {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   margin-bottom: 10px;
   height: 50px;
   width: 100%;
-  background: red;
 }
 
 .opt {
@@ -144,12 +182,9 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background: gold;
+  // background: gold;
   padding: 5px 0px;
   margin-bottom: 10px;
 }
 
-.clock {
-  border: 1px solid #f39c12;
-}
 </style>
