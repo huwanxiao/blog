@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <!-- <transition-mark v-show="showTransition" /> -->
+    <wave/>
     <transition name="fade">
       <router-view />
     </transition>
   </div>
 </template>
 <script>
-import TransitionMark from './components/TransitionMark.vue'
+import Wave from './components/Wave.vue'
 export default {
-  components: { TransitionMark },
+  components: { Wave },
   data() {
     return {
       synchro: 0, //同步器
@@ -32,7 +32,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 4s ease-in-out;
+  transition: opacity 2s ease-in-out;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;

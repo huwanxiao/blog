@@ -1,8 +1,42 @@
 <template>
   <div class="blog-content">
-    <search-bar :isShowBg="isShowBg" />
-    
-    <content-card/>
+    <!-- 粒子特效 -->
+    <vue-particles
+      color="#dedede"
+      :particleOpacity="0.7"
+      :particlesNumber="80"
+      shapeType="circle"
+      :particleSize="4"
+      linesColor="#dedede"
+      :linesWidth="1"
+      :lineLinked="true"
+      :lineOpacity="0.4"
+      :linesDistance="150"
+      :moveSpeed="3"
+      :hoverEffect="true"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
+    ></vue-particles>
+    <!-- 萤火虫特效 -->
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <!-- 页面组成组件 -->
+    <search-bar :isShowBg="isShowBg" :isShowAvatar="false"/>
+    <content-card style="margin: 0 auto" />
   </div>
 </template>
 
@@ -25,7 +59,7 @@ export default {
   },
   data() {
     return {
-      isShowBg:false,
+      isShowBg: false,
       page: {
         title: '我的文章',
       },
@@ -35,18 +69,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* .bar{
-  position: relative;
-  top: 0;
-  left: 0;
-  margin-top:10px ;
-} */
+@import '../../global/yinghuochong.css';
 .blog-content {
+  // overflow: hidden;
+  position: fixed;
+  background-size: 100%;
   position: relative;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 120vh;
   background-attachment: fixed;
   background-image: url('../assets/img/milu.jpg');
 }

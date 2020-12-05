@@ -39,11 +39,11 @@
             <div class="meta">
                 <div class="like option">
                     <i class="iconfont icon-xihuan"></i>
-                    <span>0333</span>
+                    <span>33</span>
                 </div>
                 <div class="comment option">
                     <i class="iconfont icon-comment"></i>
-                    <span>03333</span>
+                    <span>333</span>
                     <span style="color:#ccc">   回复</span>
                 </div>
             </div>

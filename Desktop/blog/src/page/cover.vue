@@ -10,7 +10,8 @@
     </transition>
     <!-- 封面标题 -->
     <router-link to="/index" tag="div"
-      ><h2 class="title">欢迎来到胡万晓、陈奕州的个人博客</h2></router-link>
+      ><h2 class="title">欢迎来到胡万晓、陈奕州的个人博客</h2></router-link
+    >
     <!-- 图片效果 -->
     <section class="pic-clip"></section>
     <!-- 剪切蒙版 -->
@@ -77,7 +78,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nav{
+.nav {
   position: fixed;
   right: 20px;
   top: 20px;

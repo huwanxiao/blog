@@ -7,6 +7,7 @@ import Login from '../page/login.vue'
 import AuthorLogin from '../page/authorLogin.vue'
 import VisitorLogin from '../page/visitorLogin.vue'
 import BlogContent from '../page/blogContent.vue'
+import GuessYouLike from '../page/guess.vue'
 import Config from '../page/config.vue'
 
 Vue.use(VueRouter)
@@ -38,6 +39,11 @@ const routes = [
         component: VisitorLogin
       }
     ]
+  },
+  {
+    path: '/guess',
+    name: 'GuessYouLike',
+    component: GuessYouLike
   },
   {
     path: '/content',

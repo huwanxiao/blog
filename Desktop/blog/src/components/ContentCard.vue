@@ -1,9 +1,9 @@
 <template>
   <div class="content_box">
-    <transition-mark/>
-    <div class="title">{{page.title}}</div>
-    <div class="content">{{page.content}}</div>
-    <comment-list/>
+    <transition-mark />
+    <div class="title">{{ page.title }}</div>
+    <div class="content">{{ page.content }}</div>
+    <comment-list />
   </div>
 </template>
 
@@ -11,7 +11,7 @@
 import CommentList from './CommentList'
 import TransitionMark from './TransitionMark.vue'
 export default {
-  components: { CommentList,TransitionMark },
+  components: { CommentList, TransitionMark },
   data() {
     return {
       isShowBg: false,
@@ -38,11 +38,11 @@ export default {
 
 <style lang="scss" scoped>
 .content_box {
-  position: relative;
-  top: 100px;
-  width: 99%;
-  max-height: 150vh;
-  margin: 0px auto;
+  position: absolute;
+  top: 80px;
+  width: 60%;
+  min-height: 100vh;
+  left: 40px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   padding: 20px;
@@ -51,10 +51,10 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-   margin-bottom:10px ;
-   size: 28px;
-   padding-left: 5px;
-   border-left: 5px solid rgb(243, 156, 18);
+  margin-bottom: 10px;
+  size: 28px;
+  padding-left: 5px;
+  border-left: 5px solid rgb(243, 156, 18);
 }
 
 .content_box > .content {

@@ -1,20 +1,17 @@
 <template>
   <div class="page-index">
     <!-- 海浪过度动画 -->
-    <transition-wave v-show="isShowTransition"/>
+    <transition-wave />
     <!-- 封面 -->
     <div class="index-cover"></div>
     <!-- 搜索栏 -->
-    <search-bar :isShowBg="isShowBg" :isShowSearch="false"/>
-    <!-- 个性签名 -->
-    <div class="signature">
-       我曾难自拔于世界之大，也沉溺于其中梦话
-    </div>
-    <!-- 大搜索框 -->
-    <big-btn class="big-btn"/>
+    <search-bar :isShowBg="isShowBg" :isShowSearch="true" v-show="isShow" />
     <!-- 底部导航栏 -->
+    <!-- 博客卡片展示 -->
+    <blog-card />
+    <footer-bar />
     <router-link to="/guess">
-      <footer-nav>猜你喜欢</footer-nav>
+      <footer-nav style="top: 850px">主页</footer-nav>
     </router-link>
   </div>
 </template>
@@ -23,14 +20,14 @@
 import BlogCard from '../components/BlogCard.vue'
 import SearchBar from '../components/SearchBar.vue'
 import TransitionWave from '../components/TransitionWave.vue'
-import BigBtn from '../components/BigBtn'
 import FooterNav from '../components/FooterNav.vue'
+import FooterBar from '../components/FooterBar.vue'
 export default {
-  components: { TransitionWave, SearchBar, BlogCard, BigBtn, FooterNav},
+  components: { TransitionWave, SearchBar, BlogCard, FooterNav, FooterBar },
   data() {
     return {
       isShowBg: false,
-      isShowTransition: true
+      isShow: true,
     }
   },
   mounted() {
@@ -38,31 +35,17 @@ export default {
     let _this = this
     window.addEventListener('scroll', function () {
       let value = window.scrollY
-      if (value >= 500) {
-        _this.isShowBg = true
+      if (value >= 10) {
+        _this.isShow = false
       } else {
-        _this.isShowBg = false
+        _this.isShow = true
       }
     })
-    setTimeout(() => {
-      _this.isShowTransition = false
-    },2200)
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.signature{
-  position: relative;
-  width: 1000px;
-  height: 100px;
-  // background: red;
-  top: 100px;
-  left: 120px;
-  font-size: 3em;
-  font-family: myFirstFont;
-  text-align: center;
-}
 .page-index {
   width: 100%;
   height: 100%;
@@ -77,12 +60,5 @@ export default {
   background-size: 100%;
   background-attachment: fixed;
 }
-.big-btn{
-  position: absolute;
-  left: 50%;
-  top: 35%;
-  transform: translateX(-50%);
-}
-
 </style>
 

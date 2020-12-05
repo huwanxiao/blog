@@ -24,7 +24,7 @@ export default {
    width: 100vh;
    height: 100vh;
    position: absolute;
-   z-index: 15;
+   z-index: 10;
 }
 .box {
   position: absolute;
@@ -38,7 +38,7 @@ export default {
 
 
 .box-active{
-  animation: upAndDown 4s linear 1;
+  animation: upAndDown 2s linear 1;
 }
 @keyframes upAndDown {
     0%{

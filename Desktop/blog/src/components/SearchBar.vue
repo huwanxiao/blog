@@ -1,7 +1,8 @@
-<template> 
-  <div class="search-bar" :class="[isShowBg == true? 'search-bar-bg':'' ]">
+<template>
+  <div class="search-bar" :class="[isShowBg == true ? 'search-bar-bg' : '']">
     <!-- 头像 -->
-    <div class="avatar">
+
+    <div class="avatar" v-show="isShowAvatar">
       <img src="../assets/img/avatar.jpg" alt="avatar" width="40" height="40" />
     </div>
     <!-- 搜索框 -->
@@ -10,21 +11,21 @@
         placeholder="请输入内容"
         prefix-icon="el-icon-search"
         v-model="keyword"
-        InfoColor='info'
-        v-show="!isShowBg"
+        InfoColor="info"
+        v-show="!isShowBg && isShowSearch"
       ></el-input>
       <el-input
         placeholder="请输入内容"
         prefix-icon="el-icon-search"
         v-model="keyword"
-        NormalColor='norm'
-        v-show="isShowBg"
+        NormalColor="norm"
+        v-show="isShowBg && isShowSearch"
       >
       </el-input>
     </div>
     <!-- 导航栏 -->
     <div class="nav">
-      <navigation/>
+      <navigation />
     </div>
   </div>
 </template>
@@ -32,11 +33,12 @@
 <script>
 import Navigation from '../components/Navigation.vue'
 export default {
-  props: ['isShowBg'],
-  components: {Navigation},
+  props: ['isShowBg', 'isShowSearch','isShowAvatar'],
+  components: { Navigation },
   data() {
     return {
       keyword: '',
+      
     }
   },
 }
@@ -54,7 +56,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   border-radius: 0px 0px 5px 15px;
-  z-index: 10;
+  z-index: 5;
 }
 .search-bar-bg {
   background: #fff;
@@ -74,7 +76,7 @@ export default {
   position: relative;
 }
 
-.nav{
+.nav {
   position: fixed;
   right: 20px;
   top: 15px;

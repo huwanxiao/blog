@@ -77,7 +77,7 @@ export default {
     window.WIDGET = {
       CONFIG: {
         layout: 2,
-        width: '270',
+        width: '250',
         height: '250',
         background: 1,
         dataColor: 'FFFFFF',
@@ -122,7 +122,7 @@ export default {
   width: 99%;
   height: 120vh;
   margin: 0 auto;
-  margin-top: 100vh;
+  margin-top: 80px;
   background: rgba(255, 255, 255, 0.9);
 }
 

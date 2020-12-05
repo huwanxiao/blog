@@ -1,20 +1,16 @@
 <template>
   <div class="test">
-    <comment-list/>
+     <footer-nav/>
   </div>
 </template>
 
 <script>
-import CommentList from '../components/CommentList'
+import FooterNav from '../components/FooterNav.vue'
 export default {
-  components:{
-    CommentList
-  },
+  components: {FooterNav},
   mounted() {},
   data() {
-    return {
- 
-    }
+    return {}
   },
   methods: {},
   computed: {},
@@ -22,12 +18,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.test{
-  position: relative;
-}
-.star{
-  width: 100vw;
-  height: 100vh;
-  background-attachment: fixed;
-}
+
 </style>>
