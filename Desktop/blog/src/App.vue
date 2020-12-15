@@ -15,8 +15,17 @@ export default {
       synchro: 0, //同步器
     }
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.getAllPassage()
+  },
+  methods: {
+    async getAllPassage() {
+      const result = await this.$http.get('getAllPassage')
+      const data = result.data.data
+      this.$store.commit("setPassageInfo",data)
+      console.log("收到所有的文章:",data);
+    },
+  },
   computed: {
     transitionWaveActive() {
       return this.$store.getters.getTransitionWave

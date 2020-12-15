@@ -14,7 +14,7 @@
     <big-btn class="big-btn"/>
     <!-- 底部导航栏 -->
     <router-link to="/guess">
-      <footer-nav>猜你喜欢</footer-nav>
+      <footer-nav style="top:610px">猜你喜欢</footer-nav>
     </router-link>
   </div>
 </template>
@@ -66,6 +66,7 @@ export default {
 .page-index {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 .index-cover {
   position: fixed;

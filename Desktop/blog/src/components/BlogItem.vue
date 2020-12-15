@@ -1,22 +1,30 @@
 <template>
   <div class="blog-item">
-    <h2 class="title">blog1</h2>
-    <div class="abstract">这是第一篇博文</div>
+    <h2 class="title" @click="toContent(item.id)">{{item.title}}</h2>
+    <div class="abstract">{{item.desc}}</div>
     <div class="meta">
       <div class="like option">
         <i class="iconfont icon-xihuan"></i>
-        <span>0333</span>
+        <span>{{item.likeCount}}</span>
       </div>
       <div class="comment option">
         <i class="iconfont icon-comment"></i>
-        <span>03333</span>
+        <span>{{item.commentCount}}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props:['item'],
+  methods:{
+    toContent(id){
+      this.$router.push({ path: '/content', query:{ id:id}})
+    },
+    
+  }
+}
 </script>
 
 <style lang="scss" scoped>

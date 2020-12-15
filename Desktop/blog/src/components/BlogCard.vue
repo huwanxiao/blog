@@ -9,20 +9,21 @@
           :imgUrl="item"
           :key="index"
           class="real-btn"
+          @click.native="toAuthorLogin"
         >
         </real-like-btn>
         <div class="mode">
-          <div class="icon iconfont icon-liebiao"></div>
-          <div class="icon iconfont icon-icon-test"></div>
+          <div class="icon iconfont icon-liebiao" @click="changeMode('list')"></div>
+          <div class="icon iconfont icon-icon-test" @click="changeMode('card')"></div>
         </div>
       </div>
       <div class="blog-card">
-        <blog-item v-for="(item, index) in 3" :key="index" />
+        <blog-item v-for="(item, index) in passageInfo" :key="index" :item="item" v-show="!isShowCardCopy"/>
+        <magic-card v-show="isShowCardCopy" :passageInfo="passageInfo"/>
       </div>
-      <div><el-pagination class="pagination"></el-pagination></div>
     </div>
 
-    <div class="tool-content">
+    <div class="tool-content" v-show="isShowTool">
       <div class="tool-card clock">
         <clock
           border="none"
@@ -60,18 +61,30 @@ import addImg from '../assets/img/add.png'
 import deleteImg from '../assets/img/delete.png'
 import BlogItem from './BlogItem.vue'
 import Clock from 'vue-clock2'
+import MagicCard from './MagicCard'
 
 export default {
-  components: { RealLikeBtn, BlogItem, Clock },
+  props:["isShowTool","isShowCard","passageInfo"],
+  components: { RealLikeBtn, BlogItem, Clock, MagicCard },
   data() {
     return {
       optImg: [addImg, deleteImg],
+      isShowCardCopy:this.isShowCard
     }
   },
   methods: {
     print(item) {
       console.log(item)
     },
+    changeMode(mode) {
+      if(mode == 'list') this.isShowCardCopy = false
+      else this.isShowCardCopy = true
+      console.log(1111);
+    },
+    toAuthorLogin(){
+      console.log("toLogin");
+      this.$router.push('/login/author');
+    }
   },
   mounted() {
     window.WIDGET = {
@@ -120,7 +133,7 @@ export default {
   padding: 20px;
   position: relative;
   width: 99%;
-  height: 120vh;
+  min-height: 110vh;
   margin: 0 auto;
   margin-top: 80px;
   background: rgba(255, 255, 255, 0.9);
@@ -143,14 +156,14 @@ export default {
 
 .blog-card {
   width: 100%;
-  height: 500px;
+  min-height: 500px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
   // background: gold;
-  padding: 5px;
+  // padding: 5px;
   margin-bottom: 10px;
 }
 

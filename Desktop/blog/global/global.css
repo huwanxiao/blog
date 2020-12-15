@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
   font-family: '微软雅黑', sans-serif;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 /* 字体 */
@@ -37,6 +38,15 @@
   background-color:rgba(255, 255, 255, 0);
   border: 2px solid #f56c6c;
 }
+.el-input__inner[BigBtn='big']:focus {
+  border: 2px solid #f56c6c;
+}
+.el-input__inner[BigBtn='big']:hover {
+  border: 2px solid #f56c6c;
+}
+.el-input__inner[BigBtn='big']:input {
+  font-size: 70px;
+}
 
 .el-input__inner[NormalColor='norm'] {
   border-radius: 20px;
@@ -45,5 +55,6 @@
 
 /* 拟态 */
 
-
-/* 拟态 */
+.for-img img{
+   width: 97%;
+}

@@ -9,6 +9,11 @@ import VisitorLogin from '../page/visitorLogin.vue'
 import BlogContent from '../page/blogContent.vue'
 import GuessYouLike from '../page/guess.vue'
 import Config from '../page/config.vue'
+import SearchResult from '../page/searchResult.vue'
+import Manage from '../blogManageSystem/Manage.vue'
+import Welcome from '../blogManageSystem/Welcome.vue'
+import Write from '../blogManageSystem/Write.vue'
+import Update from '../blogManageSystem/Update.vue'
 
 Vue.use(VueRouter)
 
@@ -26,19 +31,17 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login,
-    children: [
-      {
-        path: 'author',
-        name: 'AuthorLogin',
-        component: AuthorLogin
-      },
-      {
-        path: 'visitor',
-        name: 'VisitorLogin',
-        component: VisitorLogin
-      }
-    ]
+    component: Login
+  },
+  {
+    path: '/login/author',
+    name: 'AuthorLogin',
+    component: AuthorLogin
+  },
+  {
+    path: '/login/visitor',
+    name: 'VisitorLogin',
+    component: VisitorLogin
   },
   {
     path: '/guess',
@@ -59,6 +62,34 @@ const routes = [
     path: '/test',
     name: 'test',
     component: Test
+  },
+  {
+    path: '/result',
+    name: 'SearchResult',
+    component: SearchResult
+  },
+  {
+    path: '/manage',
+    name: 'Manage',
+    component: Manage,
+    redirect:'/welcome',
+    children: [
+      {
+        path: '/manage/write',
+        name: 'Write',
+        component: Write
+      },
+      {
+        path: '/manage/update',
+        name: 'Update',
+        component: Update
+      },
+      {
+        path: '/manage/welcome',
+        name: 'Welcome',
+        component: Welcome
+      }
+    ]
   }
 ]
 

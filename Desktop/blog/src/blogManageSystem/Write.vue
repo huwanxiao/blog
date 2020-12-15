@@ -42,9 +42,9 @@ export default {
     async postPassageList() {
       const result = await this.$http.post('addPassage',this.passageRef)
       if (result.data.code == 200) {
-        this.$store.commit('addNewPassage',this.passageRef)
+        this.$store.commit('addNewPassage',result.data.data)
         console.log("postPassageList",result.data.data)
-        return this.$message.error("添加成功")
+        return this.$message.success("添加成功")
       }
       this.$message.error("添加失败")
     },

@@ -2,11 +2,11 @@
   <div class="big-btn">
     <div class="label-box" style="padding-left: 30px">
       <span
-        v-for="(item,index) in selectCondition"
+        v-for="(item, index) in selectCondition"
         :key="index"
         class="my-label"
         @click="selectChange(index)"
-        :class="[selectStates[index] == 1 ? 'my-label-active' : '']"
+        :class="[index == idx ? 'my-label-active' : '']"
         >{{ item }}</span
       >
     </div>
@@ -15,16 +15,17 @@
       prefix-icon="icon el-icon-search"
       v-model="keyword"
       BigBtn="big"
-      @input="handleInput"
+      @focus="handleForce"
       @blur="handleBlur"
+      @keyup.enter.native="toResult"
     ></el-input>
 
     <div class="drop-select" v-show="isDropSelectShow">
-      <div class="search-guess">如何学好vue</div>
-      <div class="search-guess">如何学好vue</div>
-      <div class="search-guess">如何学好vue</div>
-      <div class="search-guess">如何学好vue</div>
-      <div class="search-guess">如何学好vue</div>
+      <div class="search-guess" @click="log">如何学好vue</div>
+      <div class="search-guess" @click="log">如何学好vue</div>
+      <div class="search-guess" @click="log">如何学好vue</div>
+      <div class="search-guess" @click="log">如何学好vue</div>
+      <div class="search-guess" @click="log">如何学好vue</div>
     </div>
   </div>
 </template>
@@ -34,28 +35,29 @@ export default {
   data() {
     return {
       keyword: '',
-      selectStates: [0, 0, 0],
-      selectCondition: ['最新', '点赞数', '评论数'],
-      isDropSelectShow:false
+      idx:-1,
+      selectCondition: ['标题','关键字','标签'],
+      isDropSelectShow: false,
     }
   },
   methods: {
     selectChange(index) {
-      console.log(index,this.selectStates[index]);
-      if (this.selectStates[index] == 1) {
-        this.$set(this.selectStates,index, 0)
-      } else {
-        this.$set(this.selectStates,index, 1)
-      }
-      console.log(index,this.selectStates[index]);
+      this.idx = index
     },
-    handleInput() {
-      this.isDropSelectShow = false
+    handleInput() {},
+    handleForce() {
+      this.isDropSelectShow = true
     },
     handleBlur() {
-      this.isDropSelectShow = true
+      this.isDropSelectShow = false
+    },
+    log() {
+      console.log('vue')
+    },
+    toResult() {
+      this.$router.push({ path: '/result', query:{ index:this.idx, word:this.keyword} })
     }
-  },
+  }
 }
 </script>
 
@@ -63,7 +65,7 @@ export default {
 .search-guess {
   width: 100%;
   height: 50px;
-  border-bottom: 2px solid rgb(243, 239, 239,0.4);
+  border-bottom: 2px solid rgb(243, 239, 239, 0.4);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -76,7 +78,6 @@ export default {
 }
 .lable-box {
   position: relative;
-
   margin-left: 20px;
   display: flex;
   justify-content: flex-start;

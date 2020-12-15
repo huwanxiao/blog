@@ -11,7 +11,7 @@
         <router-link :to="item.link" tag="div">{{ item.title }}</router-link>
       </div>
     </div>
-    <div class="bottom">
+    <div class="bottom" v-show="isButtomShow">
       <div class="detail-box" v-for="(item, index) in nav" :key="index" :class="[index == titleIndex?'':'detail-box-hide']">
         <span v-for="(item2, index2) in item.detail" :key="index2">
           <router-link :to="item.sublink[index2]" tag="span">{{ item2 }}</router-link>
@@ -38,11 +38,13 @@ export default {
       titleIndex: -1,
       isDrop: false,
       leftPos: -1,
+      isButtomShow:false
     }
   },
   methods: {
     show(index) {
       this.titleIndex = index
+      this.isButtomShow = true
     },
     hide() {
       let _this = this
@@ -63,7 +65,6 @@ export default {
   align-items: center;
   //   border: 1px solid red;
   width: 200px;
-  height: 200px;
   font-size: 16px;
   color: #f39c12;
 }

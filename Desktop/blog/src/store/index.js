@@ -5,16 +5,24 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    transitionWaveActive:true
+    passageInfo:[],
+    searchResult:[],
+    currentPassage:{},
+    visitorToken:'',
+    userInfo:{}
   },
   getters: {
-    getTransitionWave(state) {
-      return state.transitionWaveActive
-    },
+  
   },
   mutations: {
-    setTransitionWave(state, states) {
-      state.transitionWaveActive = states
+    setPassageInfo(state, msgs) {
+      state.passageInfo = msgs
     },
+    addNewPassage(state, msg) {
+      state.passageInfo.push(msg)
+    },
+    setUserInfo(state, msg) {
+      state.userInfo = msg
+    }
   }
 });

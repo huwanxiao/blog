@@ -66,6 +66,10 @@ export default {
     }
   },
   mounted() {
+    let strCookie = document.cookie;
+    let token = strCookie.split("=")[1]
+    // console.log(token);
+    window.sessionStorage.setItem("token",token)
     this.dogShow = true
     let section = document.querySelector('section')
     window.addEventListener('scroll', function () {

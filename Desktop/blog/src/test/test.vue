@@ -1,16 +1,22 @@
 <template>
   <div class="test">
-     <footer-nav/>
+    {{passage[0]}}
+    
   </div>
 </template>
 
 <script>
-import FooterNav from '../components/FooterNav.vue'
+
 export default {
-  components: {FooterNav},
-  mounted() {},
+  components: {},
+  mounted() {
+    // let pass = JSON.stringify(passage)
+    // console.log(pass.p1)
+  },
   data() {
-    return {}
+    return {
+      passage:this.$store.getters.getPassageInfo
+    }
   },
   methods: {},
   computed: {},
@@ -18,5 +24,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>>

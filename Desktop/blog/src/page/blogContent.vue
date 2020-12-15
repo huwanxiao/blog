@@ -1,23 +1,7 @@
 <template>
   <div class="blog-content">
-    <!-- 粒子特效 -->
-    <vue-particles
-      color="#dedede"
-      :particleOpacity="0.7"
-      :particlesNumber="80"
-      shapeType="circle"
-      :particleSize="4"
-      linesColor="#dedede"
-      :linesWidth="1"
-      :lineLinked="true"
-      :lineOpacity="0.4"
-      :linesDistance="150"
-      :moveSpeed="3"
-      :hoverEffect="true"
-      hoverMode="grab"
-      :clickEffect="true"
-      clickMode="push"
-    ></vue-particles>
+    <div class="bg-pic"></div>
+    <transition-mark v-show="isShowTransition"/> -->
     <!-- 萤火虫特效 -->
     <div class="firefly"></div>
     <div class="firefly"></div>
@@ -35,19 +19,27 @@
     <div class="firefly"></div>
     <div class="firefly"></div>
     <!-- 页面组成组件 -->
-    <search-bar :isShowBg="isShowBg" :isShowAvatar="false"/>
-    <content-card style="margin: 0 auto" />
+    <search-bar :isShowBg="isShowBg" :isShowAvatar="false" />
+    <content-card/>
+    <footer-bar />
+      <footer-nav @back="back">返回</footer-nav>
   </div>
+  
 </template>
 
 <script>
 import BlogCard from '../components/BlogCard.vue'
 import ContentCard from '../components/ContentCard.vue'
 import SearchBar from '../components/SearchBar.vue'
+import TransitionMark from '../components/TransitionMark'
+import FooterNav from '../components/FooterNav'
+import FooterBar from '../components/FooterBar'
 export default {
-  components: { SearchBar, ContentCard },
+  components: { SearchBar, ContentCard,TransitionMark,FooterNav,FooterBar },
   mounted() {
+    
     let _this = this
+    _this.getAllPassage()
     window.addEventListener('scroll', function () {
       let value = window.scrollY
       if (value >= 500) {
@@ -56,10 +48,27 @@ export default {
         _this.isShowBg = false
       }
     })
+    setTimeout(() => {
+      _this.isShowTransition = false
+    },3200)
+  },
+  mounted() {
+    this.getAllPassage()
+  },
+  methods: {
+    async getAllPassage() {
+      const result = await this.$http.get('getAllPassage')
+      const data = result.data.data
+      this.$store.commit("setPassageInfo",data)
+    },
+    back() {
+      this.$router.go(-1);
+    }
   },
   data() {
     return {
       isShowBg: false,
+      isShowTransition:true,
       page: {
         title: '我的文章',
       },
@@ -71,15 +80,21 @@ export default {
 <style lang="scss" scoped>
 @import '../../global/yinghuochong.css';
 .blog-content {
-  // overflow: hidden;
-  position: fixed;
-  background-size: 100%;
   position: relative;
+  background-size: 100%;
   top: 0;
   left: 0;
   width: 100%;
-  height: 120vh;
+  height: 100%;
+}
+.bg-pic{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-size: 100%;
   background-attachment: fixed;
-  background-image: url('../assets/img/milu.jpg');
+  background: url('../assets/img/milu.jpg');
 }
 </style>

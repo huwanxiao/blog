@@ -1,7 +1,6 @@
 <template>
   <div class="search-bar" :class="[isShowBg == true ? 'search-bar-bg' : '']">
     <!-- 头像 -->
-
     <div class="avatar" v-show="isShowAvatar">
       <img src="../assets/img/avatar.jpg" alt="avatar" width="40" height="40" />
     </div>
