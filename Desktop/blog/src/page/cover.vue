@@ -62,22 +62,45 @@ export default {
   },
   data() {
     return {
-      dogShow: false,
+      dogShow: false, 
     }
   },
   mounted() {
+    //1.获取token
     let strCookie = document.cookie;
-    let token = strCookie.split("=")[1]
-    // console.log(token);
-    window.sessionStorage.setItem("token",token)
+     // console.log("strCookie",strCookie);
+    let cookieArr = strCookie.split(";")
+     // console.log("cookieArr",cookieArr);
+    let tokenStr = cookieArr.find(item => {
+      // console.log(item.split("=")[0] == "UserToken");
+      return item.split("=")[0] == "UserToken"
+    })
+    if(tokenStr != undefined){
+      let value = tokenStr.split("=")[1]
+      console.log(value);
+      window.sessionStorage.setItem("UserToken",value)
+      //2.根据token获取当前用户并保存
+      this.getUserInfo(value)
+    }
+    
+    
+    //  控制小狗动画
     this.dogShow = true
+    //  监听滚动条
     let section = document.querySelector('section')
     window.addEventListener('scroll', function () {
       let value = window.scrollY
       section.style.clipPath = `circle(${value}px at center)`
     })
   },
-  methods: {},
+  methods: {
+    //获取游客的信息
+    async getUserInfo(token) {
+       const result = await this.$http.get('getUserByToken/'+token)
+       console.log("获取用户的信息",result.data.data);
+       this.$store.commit('setUserInfo',result.data.data)
+    },
+  },
 }
 </script>
 

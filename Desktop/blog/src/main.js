@@ -5,25 +5,25 @@ import store from './store'
 import '../global/global.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
-
-//markdown
+import moment from 'moment'
+import axios from 'axios' 
+axios.defaults.baseURL = 'http://localhost:3000/'
 import VueMarkdownEditor from '@kangc/v-md-editor';
 import '@kangc/v-md-editor/lib/style/base-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
+import VueParticles from 'vue-particles'
+
+//markdown
 VueMarkdownEditor.use(vuepressTheme);
 Vue.use(VueMarkdownEditor);
 
 //axios
-import axios from 'axios'
-
-// Vue.prototype.qs = qs
-axios.defaults.baseURL = 'http://localhost:3000/'
 Vue.prototype.$http = axios
-axios.defaults.withCredentials = true    
 
+//moment  
+Vue.prototype.$moment = moment
 
-import VueParticles from 'vue-particles'
+//vue-particles
 Vue.use(VueParticles)  
 
 Vue.config.productionTip = false
